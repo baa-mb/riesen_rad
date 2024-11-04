@@ -1,11 +1,30 @@
 input.onButtonPressed(Button.A, function () {
-    automat = 1
+    basic.showLeds(`
+            . . # . .
+            . # . # .
+            # . . . #
+            . . . . .
+            . . . . .
+            `)
+    pins.servoWritePin(AnalogPin.P0, 0)
+
 })
 input.onButtonPressed(Button.B, function () {
-    automat = 2
+
+    basic.showLeds(`
+            . . . . .
+            . . . . .
+            # . . . #
+            . # . # .
+            . . # . .
+            `)
+    pins.servoWritePin(AnalogPin.P0, 180)
+
+
 })
 input.onButtonPressed(Button.AB, function () {
-    automat = 0
+
+    pins.servoWritePin(AnalogPin.P0, 90)
 })
 radio.onReceivedString(function (receivedString) {
     if (receivedString == "A") {
@@ -41,27 +60,3 @@ basic.showLeds(`
     `)
 automat = 0
 radio.setGroup(24)
-basic.forever(function () {
-    if (automat == 1) {
-        basic.showLeds(`
-            . . # . .
-            . # . # .
-            # . . . #
-            . . . . .
-            . . . . .
-            `)
-        pins.servoWritePin(AnalogPin.P0, 0)
-    } else if (automat == 2) {
-        basic.showLeds(`
-            . . . . .
-            . . . . .
-            # . . . #
-            . # . # .
-            . . # . .
-            `)
-        pins.servoWritePin(AnalogPin.P0, 180)
-    } else if (automat == 0) {
-        automat = 0
-        pins.servoWritePin(AnalogPin.P0, 90)
-    }
-})
